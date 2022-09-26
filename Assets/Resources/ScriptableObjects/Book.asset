@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: Book
   m_EditorClassIdentifier: 
   decisionList:
-  - decision: Read
+  - decision: Read Book
     skillCost: 5
     stressCost: 0
     healthCost: 0
     moneyCost: 0
+    bookCost: 0
     foodCost: 0
   - decision: Sell
     skillCost: 0
     stressCost: 0
     healthCost: 0
     moneyCost: 5
+    bookCost: -1
     foodCost: 0

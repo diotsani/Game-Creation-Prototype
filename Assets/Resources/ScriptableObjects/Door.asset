@@ -13,27 +13,17 @@ MonoBehaviour:
   m_Name: Door
   m_EditorClassIdentifier: 
   decisionList:
-  - decision: Vacation
-    skillCost: 0
-    stressCost: -20
-    healthCost: 0
-    moneyCost: -40
-    foodCost: 0
-  - decision: Walk
+  - decision: Jogging
     skillCost: 0
     stressCost: -10
     healthCost: 0
     moneyCost: 0
+    bookCost: 0
     foodCost: 0
-  - decision: Snack
+  - decision: Buy Food
     skillCost: 0
     stressCost: 0
     healthCost: 0
     moneyCost: -20
+    bookCost: 0
     foodCost: 20
-  - decision: Lock
-    skillCost: 0
-    stressCost: 0
-    healthCost: 0
-    moneyCost: -20
-    foodCost: 0

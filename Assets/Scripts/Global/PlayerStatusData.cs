@@ -12,6 +12,7 @@ public class PlayerStatusData : MonoBehaviour
     public int stress;
     public int health;
     public int money;
+    public int books = 5;
     public int food;
     
     public bool isHungry;
@@ -35,6 +36,7 @@ public class PlayerStatusData : MonoBehaviour
         stress = 10;
         health = 100;
         money = 50;
+        //books = 5;
         food = 30;
     }
     public void SetHungry(bool isHungry)
@@ -112,6 +114,14 @@ public class PlayerStatusData : MonoBehaviour
         if (money < 0)
         {
             money = 0;
+        }
+    }
+    public void BookCost(int value)
+    {
+        books += value;
+        if (books < 0)
+        {
+            books = 0;
         }
     }
     public void FoodCost(int value)

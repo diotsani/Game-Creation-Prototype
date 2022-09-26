@@ -6,13 +6,21 @@ internal static class Constants
 {
     public static class Requirments
     {
-        public const string GetJob = "GetJob";
-        public const string Course = "Course";
+        public const string ApplyJob = "Apply Job";
+        public const string TakeCourse = "Take Course";
+        
+        public const string ReadBook = "Read Book";
+        
         public const string Vacation = "Vacation";
         public const string Snack = "Snack";
         public const string Lock = "Lock";
+        
         public const string Sell = "Sell";
+        
         public const string Eat = "Eat";
+        
+        public const string Repair = "Repair";
+        public const string ThrowFood = "Throw Food";
     }
     public static class GetData
     {

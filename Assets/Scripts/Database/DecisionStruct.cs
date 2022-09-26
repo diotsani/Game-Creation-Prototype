@@ -7,5 +7,6 @@ public class DecisionStruct
     public int stressCost;
     public int healthCost;
     public int moneyCost;
+    public int bookCost;
     public int foodCost;
 }

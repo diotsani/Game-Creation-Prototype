@@ -15,13 +15,22 @@ MonoBehaviour:
   decisionList:
   - decision: Social Media
     skillCost: 0
-    stressCost: -5
+    stressCost: -10
     healthCost: 0
     moneyCost: 0
+    bookCost: 0
+    foodCost: 0
+  - decision: Repair
+    skillCost: 0
+    stressCost: 0
+    healthCost: 0
+    moneyCost: -25
+    bookCost: 0
     foodCost: 0
   - decision: Sell
     skillCost: 0
     stressCost: 0
     healthCost: 0
     moneyCost: 50
+    bookCost: 0
     foodCost: 0

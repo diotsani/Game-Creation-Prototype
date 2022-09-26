@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 public class DayManager : MonoBehaviour
 {
-    public int amountDay;
+    public int amountDay { get; private set; }
     [SerializeField] private int maxDay;
     private bool isMaxDay;
 
@@ -47,21 +47,11 @@ public class DayManager : MonoBehaviour
     {
         switch (SetDay)
         {
-            case 0:
-                GetDay(SetDay);
-                break;
-            case 1:
-                GetDay(SetDay);
-                break;
-            case 2:
-                GetDay(SetDay);
-                break;
-            case 3:
-                GetDay(SetDay);
-                break;
-            case 4:
-                GetDay(SetDay);
-                break;
+            case 0: GetDay(SetDay); break;
+            case 1: GetDay(SetDay); break;
+            case 2: GetDay(SetDay); break;
+            case 3: GetDay(SetDay); break;
+            case 4: GetDay(SetDay); break;
         }
     }
     void GetDay(int GetDay)
@@ -71,8 +61,6 @@ public class DayManager : MonoBehaviour
 }
 public enum ObjectState
 {
-    VeryGood,
     Good,
-    LessGood,
-    NotGood
+    Damaged
 }

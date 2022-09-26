@@ -18,10 +18,12 @@ MonoBehaviour:
     stressCost: 0
     healthCost: 24
     moneyCost: 0
+    bookCost: 0
     foodCost: -10
-  - decision: Sell
+  - decision: Throw Food
     skillCost: 0
     stressCost: 0
     healthCost: 0
-    moneyCost: 50
+    moneyCost: 0
+    bookCost: 0
     foodCost: 0

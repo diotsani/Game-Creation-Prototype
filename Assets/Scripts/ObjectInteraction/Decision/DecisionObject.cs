@@ -6,21 +6,23 @@ using UnityEngine.UI;
 
 public class DecisionObject : MonoBehaviour
 {
-    public delegate void OnClickInteraction();
-    public static event OnClickInteraction OnClickInteracted;
+    public delegate void EventName();
+    public static event EventName OnClickInteracted;
     
-    [SerializeField] private Button button;
+    public Button button;
     [SerializeField] private Button lockButton;
     [SerializeField] private TMP_Text text;
-    [SerializeField] string decisionText;
+    public string decisionText;
 
     [SerializeField] private int skillCost;
     [SerializeField] private int stressCost;
     [SerializeField] private int healthCost;
     [SerializeField] private int moneyCost;
+    [SerializeField] private int bookCost;
     [SerializeField] private int foodCost;
+    public BaseObject baseObject { get; private set;}
     private PlayerStatusData playerStatusData = PlayerStatusData.instance;
-    public void Init(string GetName, int GetSkillCost, int GetStressCost,int GetHealthCost, int GetMoneyCost, int GetFoodCost)
+    public void Init(string GetName, int GetSkillCost, int GetStressCost,int GetHealthCost, int GetMoneyCost,int GetBookCost, int GetFoodCost)
     {
         decisionText = GetName;
         this.name = GetName;
@@ -30,6 +32,7 @@ public class DecisionObject : MonoBehaviour
         stressCost = GetStressCost;
         healthCost = GetHealthCost;
         moneyCost = GetMoneyCost;
+        bookCost = GetBookCost;
         foodCost = GetFoodCost;
     }
     public void OnClick(DecisionObject decisionObject,GameObject obj, BaseObject baseObject)
@@ -45,9 +48,11 @@ public class DecisionObject : MonoBehaviour
         playerStatusData.StressCost(stressCost);
         playerStatusData.HealthCost(healthCost);
         playerStatusData.MoneyCost(moneyCost);
+        playerStatusData.BookCost(bookCost);
         playerStatusData.FoodCost(foodCost);
         
-        SetSellDecision(obj,baseObject);
+        //SetSellDecision(obj,baseObject);
+        //SetReapairDecision(baseObject);
     }
     void SetSellDecision(GameObject obj,BaseObject baseObject)
     {
@@ -57,37 +62,44 @@ public class DecisionObject : MonoBehaviour
             baseObject.gameObject.SetActive(false);
         }
     }
+    void SetReapairDecision(BaseObject baseObject)
+    {
+        if (decisionText == Constants.Requirments.Repair)
+        {
+            baseObject.ResetAllDecision();
+            baseObject.ResetAmountClick();
+            baseObject._objectState = ObjectState.Good;
+        }
+    }
     public void SetRequirementDecision()
     {
-        LaptopRequirement();
+        //LaptopRequirement();
         DoorRequirement();
         RefrigeratorRequirement();
     }
     void LaptopRequirement()
     {
-        if (decisionText == Constants.Requirments.Course)
+        if (decisionText == Constants.Requirments.TakeCourse)
         {
             if (playerStatusData.stress >= 50)
             {
                 GetLockButton().SetActive(true);
-                
+                return;
             }
-            else
-            {
-                GetLockButton().SetActive(false);
-                
-            }
+            GetLockButton().SetActive(false);
         }
-        if (decisionText == Constants.Requirments.GetJob)
+        if (decisionText == Constants.Requirments.ApplyJob)
         {
             if (playerStatusData.skill >= 100)
             {
                 GetLockButton().SetActive(false);
+                return;
             }
-            else
-            {
-                GetLockButton().SetActive(true);
-            }
+            GetLockButton().SetActive(true);
+        }
+        if(decisionText == Constants.Requirments.Repair)
+        {
+            GetThisObject().SetActive(false);
         }
     }
     void DoorRequirement()
@@ -130,7 +142,7 @@ public class DecisionObject : MonoBehaviour
     {
         if (decisionText == Constants.Requirments.Eat)
         {
-            if (playerStatusData.food < 10 || playerStatusData.health >= 100)
+            if (playerStatusData.food < 10)
             {
                 GetLockButton().SetActive(true);
             }
@@ -140,19 +152,31 @@ public class DecisionObject : MonoBehaviour
             }
         }
     }
-    private GameObject GetLockButton()
+    public void ServiceDecision(DecisionObject obj)
+    {
+        if (obj.decisionText == Constants.Requirments.Repair)
+        {
+            GetLockButton().gameObject.SetActive(false);
+            GetThisObject().SetActive(true);
+        }
+    }
+    public GameObject GetLockButton()
     {
         return lockButton.gameObject;
     }
+    public GameObject GetThisObject()
+    {
+        return this.gameObject;
+    }
     void SetLockButton()
     {
-        if (decisionText == Constants.Requirments.Course)
+        if (decisionText == Constants.Requirments.TakeCourse)
         {
-            //Debug.Log(name + " is locked");
+            Debug.Log(name + " is locked");
         }
-        if (decisionText == Constants.Requirments.GetJob)
+        if (decisionText == Constants.Requirments.ApplyJob)
         {
-            //Debug.Log(name + " is locked");
+            Debug.Log(name + " is locked");
         }
         Debug.Log(name + " is locked");
     }

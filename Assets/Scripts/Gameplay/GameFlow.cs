@@ -9,42 +9,45 @@ public class GameFlow : MonoBehaviour
     public static event EventName OnNextDay;
     public static event EventName OnChangeState;
     public static event EventName OnResetClick;
-    
-    [SerializeField] private int amountInteractables;
-    [SerializeField] private int maxInteractables;
+
+    [Header("Config")]
+    private int _maxInteractables = 3;
+    [SerializeField] private int _amountInteractables;
+    [SerializeField] private int _resetInteractables;
 
     private PlayerStatusData playerStatusData;
     private void OnEnable()
     {
-        DecisionObject.OnClickInteracted += AddInteractable;
+        DecisionObject.OnClickInteracted += ReduceInteractable;
     }
 
     private void OnDisable()
     {
-        DecisionObject.OnClickInteracted -= AddInteractable;
+        DecisionObject.OnClickInteracted -= ReduceInteractable;
     }
 
     private void Start()
     {
         playerStatusData = PlayerStatusData.instance;
-        amountInteractables = 0;
-        maxInteractables = 3;
+        
+        _amountInteractables = _maxInteractables;
+        _resetInteractables = 0;
     }
 
     private void Update()
     {
         ResetInteractables();
     }
-    void AddInteractable()
+    void ReduceInteractable()
     {
-        amountInteractables++;
+        _amountInteractables--;
     }
     void ResetInteractables()
     {
-        if (amountInteractables == maxInteractables)
+        if (_amountInteractables == _resetInteractables)
         {
             OnNewDay();
-            amountInteractables = 0;
+            _amountInteractables = _maxInteractables;
         }
     }
 

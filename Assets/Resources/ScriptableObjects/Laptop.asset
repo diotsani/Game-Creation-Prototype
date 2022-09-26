@@ -13,24 +13,31 @@ MonoBehaviour:
   m_Name: Laptop
   m_EditorClassIdentifier: 
   decisionList:
-  - decisionID: G1A
-    decision: GetJob
+  - decision: Apply Job
     skillCost: 0
     stressCost: 0
     healthCost: 0
     moneyCost: 0
+    bookCost: 0
     foodCost: 0
-  - decisionID: G1B
-    decision: Course
+  - decision: Take Course
     skillCost: 10
-    stressCost: 20
+    stressCost: 30
     healthCost: 0
     moneyCost: 0
+    bookCost: 0
     foodCost: 0
-  - decisionID: G1C
-    decision: Play
+  - decision: Play Game
     skillCost: 0
     stressCost: -10
     healthCost: 0
     moneyCost: 0
+    bookCost: 0
+    foodCost: 0
+  - decision: Repair
+    skillCost: 0
+    stressCost: 0
+    healthCost: 0
+    moneyCost: -50
+    bookCost: 0
     foodCost: 0
