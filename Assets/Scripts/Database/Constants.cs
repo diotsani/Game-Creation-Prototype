@@ -9,12 +9,13 @@ internal static class Constants
         public const string ApplyJob = "Apply Job";
         public const string TakeCourse = "Take Course";
         
+        public const string SocialMedia = "Social Media";
+        
         public const string ReadBook = "Read Book";
         
-        public const string Vacation = "Vacation";
-        public const string Snack = "Snack";
-        public const string Lock = "Lock";
-        
+        public const string Jogging = "Jogging";
+        public const string BuyFood = "Buy Food";
+
         public const string Sell = "Sell";
         
         public const string Eat = "Eat";

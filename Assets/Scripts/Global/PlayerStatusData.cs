@@ -8,6 +8,9 @@ public class PlayerStatusData : MonoBehaviour
 {
     public static PlayerStatusData instance;
     
+    public delegate void EventName();
+    public static event EventName OnRepairedObject;
+    
     public int skill;
     public int stress;
     public int health;
@@ -110,6 +113,15 @@ public class PlayerStatusData : MonoBehaviour
     }
     public void MoneyCost(int value)
     {
+        var PositiveValue = Mathf.Abs(value);
+       // Debug.Log(PositiveValue);
+
+        if (money < PositiveValue)
+        {
+            Debug.Log("Not enough money");
+            return;
+        }
+        OnRepairedObject?.Invoke();
         money += value;
         if (money < 0)
         {
@@ -139,5 +151,9 @@ public class PlayerStatusData : MonoBehaviour
         {
             food = 0;
         }
+    }
+    public void ResetFood()
+    {
+        food = 0;
     }
 }

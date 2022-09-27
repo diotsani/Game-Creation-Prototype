@@ -236,8 +236,11 @@ MonoBehaviour:
   _objectState: 0
   amountClicked: 0
   dailyClicks: 0
+  consecutiveDay: 0
   dayManager: {fileID: 1167444798}
+  gameFlow: {fileID: 1257640374}
   decisionParent: {fileID: 858276680}
+  objectInteract: {fileID: 105037211}
   decisionPrefabs: {fileID: 0}
   _isClicked: 0
   _isDamaged: 0
@@ -342,8 +345,11 @@ MonoBehaviour:
   _objectState: 0
   amountClicked: 0
   dailyClicks: 0
+  consecutiveDay: 0
   dayManager: {fileID: 1167444798}
+  gameFlow: {fileID: 1257640374}
   decisionParent: {fileID: 710636105}
+  objectInteract: {fileID: 184965659}
   decisionPrefabs: {fileID: 0}
   _isClicked: 0
   _isDamaged: 0
@@ -924,8 +930,11 @@ MonoBehaviour:
   _objectState: 0
   amountClicked: 0
   dailyClicks: 0
+  consecutiveDay: 0
   dayManager: {fileID: 1167444798}
+  gameFlow: {fileID: 1257640374}
   decisionParent: {fileID: 722565004}
+  objectInteract: {fileID: 599322711}
   decisionPrefabs: {fileID: 0}
   _isClicked: 0
   _isDamaged: 0
@@ -1042,8 +1051,11 @@ MonoBehaviour:
   _objectState: 0
   amountClicked: 0
   dailyClicks: 0
+  consecutiveDay: 0
   dayManager: {fileID: 1167444798}
+  gameFlow: {fileID: 1257640374}
   decisionParent: {fileID: 1915416253}
+  objectInteract: {fileID: 642713544}
   decisionPrefabs: {fileID: 0}
   _isClicked: 0
   _isDamaged: 0
@@ -1556,8 +1568,11 @@ MonoBehaviour:
   _objectState: 0
   amountClicked: 0
   dailyClicks: 0
+  consecutiveDay: 0
   dayManager: {fileID: 1167444798}
+  gameFlow: {fileID: 1257640374}
   decisionParent: {fileID: 430996207}
+  objectInteract: {fileID: 1469914663}
   decisionPrefabs: {fileID: 0}
   _isClicked: 0
   _isDamaged: 0

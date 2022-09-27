@@ -10,6 +10,20 @@ public class DoorObject : BaseObject
         base.Start();
     }
 
+    protected override void ObjectNeedRequirement(List<DecisionObject> decisionObjects)
+    {
+        for (int i = 0; i < decisionObjects.Count; i++)
+        {
+            var obj = decisionObjects[i];
+            
+            if (obj.decisionText == Constants.Requirments.BuyFood)
+            {
+                bool set = playerStatusData.money >= 20;
+                obj.GetThisObject().SetActive(set);
+            }
+        }
+    }
+
     public override void ResetAllDecision()
     {
         throw new System.NotImplementedException();

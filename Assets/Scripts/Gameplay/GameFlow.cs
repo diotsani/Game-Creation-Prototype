@@ -38,6 +38,10 @@ public class GameFlow : MonoBehaviour
     {
         ResetInteractables();
     }
+    public void AddInteractable()
+    {
+        _amountInteractables++;
+    }
     void ReduceInteractable()
     {
         _amountInteractables--;

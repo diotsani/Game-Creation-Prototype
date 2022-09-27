@@ -15,10 +15,13 @@ public abstract class BaseObject : MonoBehaviour
     [Header("Config")]
     [SerializeField] protected int amountClicked;
     [SerializeField] protected int dailyClicks;
+    [SerializeField] protected int consecutiveDay;
     
     [Header("Dependency")]
     [SerializeField] protected DayManager dayManager;
+    [SerializeField] protected GameFlow gameFlow;
     [SerializeField] protected GameObject decisionParent;
+    [SerializeField] protected GameObject objectInteract;
     [Header("Prefab")]
     [SerializeField] protected DecisionObject decisionPrefabs;
     
@@ -34,12 +37,14 @@ public abstract class BaseObject : MonoBehaviour
     {
         GameFlow.OnChangeState += CheckObjectState;
         GameFlow.OnResetClick += ResetDailyClicks;
+        PlayerStatusData.OnRepairedObject += OnCheckRepaired;
     }
 
     protected virtual void OnDisable()
     {
        GameFlow.OnChangeState -= CheckObjectState;
        GameFlow.OnResetClick -= ResetDailyClicks;
+       PlayerStatusData.OnRepairedObject -= OnCheckRepaired;
     }
 
     protected virtual void Start()
@@ -62,13 +67,12 @@ public abstract class BaseObject : MonoBehaviour
             var getFood = _decisionScriptable.decisionList[index].foodCost;
             
             decisionParent.transform.position = pos;
-            var obj = Instantiate(decisionPrefabs, decisionParent.transform);
-            _decisionObjects.Add(obj.GetComponent<DecisionObject>());
-            obj.Init(getNameDecision,getSkill,getStress,getHealth,getMoney,getBook,getFood);
+            var decisionButton = Instantiate(decisionPrefabs, decisionParent.transform);
+            _decisionObjects.Add(decisionButton.GetComponent<DecisionObject>());
+            decisionButton.Init(getNameDecision,getSkill,getStress,getHealth,getMoney,getBook,getFood);
             
-            obj.GetComponent<Button>().onClick.RemoveAllListeners();
-            obj.OnClick(obj,decisionParent,this);
-            obj.GetComponent<Button>().onClick.AddListener(AddAmountClick);
+            decisionButton.OnClick(decisionButton,this);
+            //obj.button.onClick.AddListener(AddAmountClick);
         }
         ObjectNeedRequirement(_decisionObjects);
         SetRequirment();
@@ -84,11 +88,10 @@ public abstract class BaseObject : MonoBehaviour
         }
     }
 
-    protected virtual void AddAmountClick()
+    public void AddAmountClick()
     {
         amountClicked++;
         dailyClicks++;
-        
     }
     public void ResetAmountClick()
     {
@@ -98,6 +101,11 @@ public abstract class BaseObject : MonoBehaviour
     {
         dailyClicks = 0;
     }
+    public void GetDecisionParent(bool active)
+    {
+        objectInteract.SetActive(active);
+        decisionParent.SetActive(active);
+    }
     public void SetRequirment()
     {
         for (int i = 0; i < _decisionObjects.Count; i++)
@@ -106,9 +114,13 @@ public abstract class BaseObject : MonoBehaviour
         }
     }
 
-    protected virtual void ObjectNeedRequirement(List<DecisionObject> obj)
+    protected virtual void ObjectNeedRequirement(List<DecisionObject> decisionObjects)
     {
         
+    }
+    public virtual void ResetConsecutiveDay()
+    {
+        consecutiveDay = 0;
     }
     public abstract void ResetAllDecision();
     protected abstract void OnDamagedObject();
@@ -116,5 +128,17 @@ public abstract class BaseObject : MonoBehaviour
     protected virtual void CheckObjectState()
     {
         
+    }
+
+    protected virtual void OnCheckRepaired()
+    {
+        
+    }
+    public void DeactivateDecisionButton()
+    {
+        foreach (var objs in _decisionObjects)
+        {
+            objs.button.interactable = false;
+        }
     }
 }

@@ -9,27 +9,17 @@ public class BookObject : BaseObject
     {
         _decisionScriptable = Resources.Load<DecisionScriptable>(Constants.GetData.Book);
         base.Start();
-        OnClickSellBook();
     }
-
-    void OnClickSellBook()
+    protected override void ObjectNeedRequirement(List<DecisionObject> decisionObjects)
     {
-        for (int i = 0; i < _decisionObjects.Count; i++)
+        foreach (var obj in decisionObjects)
         {
-            var obj = _decisionObjects[i];
-            obj.button.onClick.AddListener(() => SetSellBook(obj));
-        }
-    }
-
-    void SetSellBook(DecisionObject obj)
-    {
-        if (obj.decisionText == Constants.Requirments.Sell)
-        {
-            Debug.Log(obj.name);
-        }
-        if (playerStatusData.books <= 0)
-        {
-            obj.GetThisObject().SetActive(false);
+            bool set = !(playerStatusData.books <= 0);
+            obj.GetThisObject().SetActive(set);
+            // if (playerStatusData.books <= 0)
+            // {
+            //     obj.GetThisObject().SetActive(false);
+            // }
         }
     }
 

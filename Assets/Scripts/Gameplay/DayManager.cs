@@ -8,6 +8,8 @@ using UnityEngine.Serialization;
 
 public class DayManager : MonoBehaviour
 {
+    public delegate void EventName();
+    public static event EventName OnGameover;
     public int amountDay { get; private set; }
     [SerializeField] private int maxDay;
     private bool isMaxDay;
@@ -40,6 +42,7 @@ public class DayManager : MonoBehaviour
         if (amountDay == maxDay)
         {
             isMaxDay = true;
+            OnGameover?.Invoke();
             Debug.Log("Game Over");
         }
     }
