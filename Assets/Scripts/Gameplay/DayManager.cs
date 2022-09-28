@@ -11,7 +11,7 @@ public class DayManager : MonoBehaviour
     public delegate void EventName();
     public static event EventName OnGameover;
     public int amountDay { get; private set; }
-    [SerializeField] private int maxDay;
+    private int maxDay;
     private bool isMaxDay;
 
     private void OnEnable()
@@ -59,7 +59,7 @@ public class DayManager : MonoBehaviour
     }
     void GetDay(int GetDay)
     {
-        Debug.Log("Day "+ GetDay);
+        //Debug.Log("Day "+ GetDay);
     }
 }
 public enum ObjectState

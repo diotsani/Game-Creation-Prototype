@@ -15,7 +15,7 @@ public class PlayerStatusData : MonoBehaviour
     public int stress;
     public int health;
     public int money;
-    public int books = 5;
+    public int book = 5;
     public int food;
     
     public bool isHungry;
@@ -118,7 +118,7 @@ public class PlayerStatusData : MonoBehaviour
 
         if (money < PositiveValue)
         {
-            Debug.Log("Not enough money");
+            //Debug.Log("Not enough money");
             return;
         }
         OnRepairedObject?.Invoke();
@@ -130,10 +130,10 @@ public class PlayerStatusData : MonoBehaviour
     }
     public void BookCost(int value)
     {
-        books += value;
-        if (books < 0)
+        book += value;
+        if (book < 0)
         {
-            books = 0;
+            book = 0;
         }
     }
     public void FoodCost(int value)

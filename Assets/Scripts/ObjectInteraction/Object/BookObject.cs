@@ -14,7 +14,7 @@ public class BookObject : BaseObject
     {
         foreach (var obj in decisionObjects)
         {
-            bool set = !(playerStatusData.books <= 0);
+            bool set = !(playerStatusData.book <= 0);
             obj.GetThisObject().SetActive(set);
             // if (playerStatusData.books <= 0)
             // {

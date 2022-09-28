@@ -162,6 +162,15 @@ public class DecisionObject : MonoBehaviour
     {
         return this.gameObject;
     }
+    public void SetLockButton()
+    { 
+        lockButton.onClick.RemoveAllListeners();
+        lockButton.onClick.AddListener(OnClickLockButton);
+    }
+    void OnClickLockButton()
+    {
+        Debug.Log(name + " Lock");
+    }
     void CheckMoneyCost()
     {
         var PositiveValue = Mathf.Abs(moneyCost);

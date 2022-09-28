@@ -4,6 +4,17 @@ using UnityEngine;
 
 internal static class Constants
 {
+    public static class Status
+    {
+        public const string Skill = "Skill: ";
+        public const string Stress = "Stress: ";
+        public const string Health = "Health: ";
+        public const string Money = "Money: ";
+        public const string Book = "Book: ";
+        public const string Food = "Food: ";
+        public const string Action = "Action: ";
+        public const string Day = "Day: ";
+    }
     public static class Requirments
     {
         public const string ApplyJob = "Apply Job";

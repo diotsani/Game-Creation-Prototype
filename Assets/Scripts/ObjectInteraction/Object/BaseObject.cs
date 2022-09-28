@@ -37,14 +37,12 @@ public abstract class BaseObject : MonoBehaviour
     {
         GameFlow.OnChangeState += CheckObjectState;
         GameFlow.OnResetClick += ResetDailyClicks;
-        PlayerStatusData.OnRepairedObject += OnCheckRepaired;
     }
 
     protected virtual void OnDisable()
     {
        GameFlow.OnChangeState -= CheckObjectState;
        GameFlow.OnResetClick -= ResetDailyClicks;
-       PlayerStatusData.OnRepairedObject -= OnCheckRepaired;
     }
 
     protected virtual void Start()
@@ -75,7 +73,6 @@ public abstract class BaseObject : MonoBehaviour
             //obj.button.onClick.AddListener(AddAmountClick);
         }
         ObjectNeedRequirement(_decisionObjects);
-        SetRequirment();
     }
 
     protected virtual void Update()
@@ -83,7 +80,6 @@ public abstract class BaseObject : MonoBehaviour
         if(_isClicked)
         {
             ObjectNeedRequirement(_decisionObjects);
-            SetRequirment();
             _isClicked = false;
         }
     }
@@ -126,11 +122,6 @@ public abstract class BaseObject : MonoBehaviour
     protected abstract void OnDamagedObject();
 
     protected virtual void CheckObjectState()
-    {
-        
-    }
-
-    protected virtual void OnCheckRepaired()
     {
         
     }

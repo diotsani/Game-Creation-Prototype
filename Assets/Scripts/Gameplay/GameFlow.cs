@@ -12,7 +12,7 @@ public class GameFlow : MonoBehaviour
 
     [Header("Config")]
     private int _maxInteractables = 3;
-    [SerializeField] private int _amountInteractables;
+    public int _amountInteractables;
     [SerializeField] private int _resetInteractables;
 
     private PlayerStatusData playerStatusData;
