@@ -9,6 +9,8 @@ public class BookObject : BaseObject
     {
         _decisionScriptable = Resources.Load<DecisionScriptable>(Constants.GetData.Book);
         base.Start();
+        
+        OnClickSpecificDecision();
     }
     protected override void ObjectNeedRequirement(List<DecisionObject> decisionObjects)
     {
@@ -16,10 +18,21 @@ public class BookObject : BaseObject
         {
             bool set = !(playerStatusData.book <= 0);
             obj.GetThisObject().SetActive(set);
-            // if (playerStatusData.books <= 0)
-            // {
-            //     obj.GetThisObject().SetActive(false);
-            // }
+        }
+    }
+    void OnClickSpecificDecision()
+    {
+        for (int i = 0; i < _decisionObjects.Count; i++)
+        {
+            var obj = _decisionObjects[i];
+            obj.button.onClick.AddListener(()=>SpecificDecision(obj));
+        }
+    }
+    void SpecificDecision(DecisionObject obj)
+    {
+        if (obj.decisionText == Constants.Requirments.CheckBookShelf)
+        {
+            OnShowMonologueText(Constants.Monologue.CheckBookMonolog);
         }
     }
 

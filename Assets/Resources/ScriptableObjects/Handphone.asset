@@ -20,13 +20,15 @@ MonoBehaviour:
     moneyCost: 0
     bookCost: 0
     foodCost: 0
+    actionCost: 0
   - decision: Sell
     skillCost: 0
     stressCost: 0
     healthCost: 0
-    moneyCost: 50
+    moneyCost: 18
     bookCost: 0
     foodCost: 0
+    actionCost: 1
   - decision: Repair
     skillCost: 0
     stressCost: 0
@@ -34,3 +36,4 @@ MonoBehaviour:
     moneyCost: -25
     bookCost: 0
     foodCost: 0
+    actionCost: 1

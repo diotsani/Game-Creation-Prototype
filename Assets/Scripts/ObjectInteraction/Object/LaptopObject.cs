@@ -27,12 +27,20 @@ public class LaptopObject : BaseObject
     {
         if (obj.decisionText == Constants.Requirments.ApplyJob)
         {
+            OnShowMonologueText(Constants.Monologue.ApplyJobMonolog);
             _isApplying = true;
             obj.GetThisObject().SetActive(false);
             Debug.Log("You have applied for a job");
         }
+
+        if (obj.decisionText == Constants.Requirments.PlayGame)
+        {
+            OnShowMonologueText(Constants.Monologue.PlayGameMonolog);
+            Debug.Log(obj.name);
+        }
         if (obj.decisionText == Constants.Requirments.Repair)
         {
+            
             ResetAllDecision();
             ResetAmountClick();
             _objectState = ObjectState.Good;

@@ -9,4 +9,5 @@ public class DecisionStruct
     public int moneyCost;
     public int bookCost;
     public int foodCost;
+    public int actionCost;
 }

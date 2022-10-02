@@ -20,6 +20,7 @@ MonoBehaviour:
     moneyCost: 0
     bookCost: 0
     foodCost: 0
+    actionCost: 1
   - decision: Take Course
     skillCost: 10
     stressCost: 30
@@ -27,6 +28,7 @@ MonoBehaviour:
     moneyCost: 0
     bookCost: 0
     foodCost: 0
+    actionCost: 1
   - decision: Play Game
     skillCost: 0
     stressCost: -10
@@ -34,6 +36,7 @@ MonoBehaviour:
     moneyCost: 0
     bookCost: 0
     foodCost: 0
+    actionCost: 1
   - decision: Repair
     skillCost: 0
     stressCost: 0
@@ -41,3 +44,4 @@ MonoBehaviour:
     moneyCost: -50
     bookCost: 0
     foodCost: 0
+    actionCost: 1

@@ -20,6 +20,15 @@ MonoBehaviour:
     moneyCost: 0
     bookCost: 0
     foodCost: 0
+    actionCost: 1
+  - decision: Check Book Shelf
+    skillCost: 0
+    stressCost: 0
+    healthCost: 0
+    moneyCost: 0
+    bookCost: 0
+    foodCost: 0
+    actionCost: 0
   - decision: Sell
     skillCost: 0
     stressCost: 0
@@ -27,3 +36,4 @@ MonoBehaviour:
     moneyCost: 5
     bookCost: -1
     foodCost: 0
+    actionCost: 1

@@ -6,9 +6,15 @@ using TMPro.SpriteAssetUtilities;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
-
+public enum ObjectState
+{
+    Good,
+    Damaged
+}
 public abstract class BaseObject : MonoBehaviour
 {
+    public delegate void EventName(string monologue);
+    public static event EventName OnShowMonologue;
     
     public ObjectState _objectState;
     
@@ -27,7 +33,7 @@ public abstract class BaseObject : MonoBehaviour
     
     protected Vector3 _getPosition;
     
-    protected List<DecisionObject> _decisionObjects;
+    [SerializeField] protected List<DecisionObject> _decisionObjects;
     protected DecisionScriptable _decisionScriptable;
     public bool _isClicked;
     public bool _isDamaged;
@@ -63,11 +69,12 @@ public abstract class BaseObject : MonoBehaviour
             var getMoney = _decisionScriptable.decisionList[index].moneyCost;
             var getBook = _decisionScriptable.decisionList[index].bookCost;
             var getFood = _decisionScriptable.decisionList[index].foodCost;
+            var getAction = _decisionScriptable.decisionList[index].actionCost;
             
             decisionParent.transform.position = pos;
             var decisionButton = Instantiate(decisionPrefabs, decisionParent.transform);
             _decisionObjects.Add(decisionButton.GetComponent<DecisionObject>());
-            decisionButton.Init(getNameDecision,getSkill,getStress,getHealth,getMoney,getBook,getFood);
+            decisionButton.Init(getNameDecision,getSkill,getStress,getHealth,getMoney,getBook,getFood,getAction);
             
             decisionButton.OnClick(decisionButton,this);
             //obj.button.onClick.AddListener(AddAmountClick);
@@ -102,13 +109,6 @@ public abstract class BaseObject : MonoBehaviour
         objectInteract.SetActive(active);
         decisionParent.SetActive(active);
     }
-    public void SetRequirment()
-    {
-        for (int i = 0; i < _decisionObjects.Count; i++)
-        {
-            _decisionObjects[i].SetRequirementDecision();
-        }
-    }
 
     protected virtual void ObjectNeedRequirement(List<DecisionObject> decisionObjects)
     {
@@ -124,6 +124,10 @@ public abstract class BaseObject : MonoBehaviour
     protected virtual void CheckObjectState()
     {
         
+    }
+    protected virtual void OnShowMonologueText(string monologue)
+    {
+        OnShowMonologue?.Invoke(monologue);
     }
     public void DeactivateDecisionButton()
     {

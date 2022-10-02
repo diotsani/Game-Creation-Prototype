@@ -9,7 +9,7 @@ public class PlayerStatusData : MonoBehaviour
     public static PlayerStatusData instance;
     
     public delegate void EventName();
-    public static event EventName OnRepairedObject;
+    public static event EventName OnResetAction;
     
     public int skill;
     public int stress;
@@ -17,8 +17,8 @@ public class PlayerStatusData : MonoBehaviour
     public int money;
     public int book = 5;
     public int food;
-    
-    public bool isHungry;
+    public int action;
+    private int maxAction = 3;
 
     private void Awake()
     {
@@ -41,10 +41,12 @@ public class PlayerStatusData : MonoBehaviour
         money = 50;
         //books = 5;
         food = 30;
+        action = maxAction;
     }
-    public void SetHungry(bool isHungry)
+
+    private void Update()
     {
-        this.isHungry = isHungry;
+        ResetAction();
     }
 
     private void SetValueName(int valueName)
@@ -56,6 +58,19 @@ public class PlayerStatusData : MonoBehaviour
         if(valueName > 100)
         {
             valueName = 100;
+        }
+    }
+    public void ActionCost(int value)
+    {
+        action -= value;
+    }
+
+    public void ResetAction()
+    {
+        if (action == 0)
+        {
+            OnResetAction?.Invoke();
+            action = maxAction;
         }
     }
     public void SkillCost(int value)
@@ -121,7 +136,6 @@ public class PlayerStatusData : MonoBehaviour
             //Debug.Log("Not enough money");
             return;
         }
-        OnRepairedObject?.Invoke();
         money += value;
         if (money < 0)
         {

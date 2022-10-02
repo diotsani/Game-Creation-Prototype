@@ -20,6 +20,7 @@ MonoBehaviour:
     moneyCost: 0
     bookCost: 0
     foodCost: -10
+    actionCost: 1
   - decision: Throw Food
     skillCost: 0
     stressCost: 0
@@ -27,3 +28,12 @@ MonoBehaviour:
     moneyCost: 0
     bookCost: 0
     foodCost: 0
+    actionCost: 1
+  - decision: Check Food Stock
+    skillCost: 0
+    stressCost: 0
+    healthCost: 0
+    moneyCost: 0
+    bookCost: 0
+    foodCost: 0
+    actionCost: 0

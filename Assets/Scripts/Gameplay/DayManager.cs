@@ -26,7 +26,6 @@ public class DayManager : MonoBehaviour
     {
         amountDay = 1;
         maxDay = 7;
-        GetDay(amountDay);
     }
     void ChangeNextDay()
     {
@@ -34,7 +33,6 @@ public class DayManager : MonoBehaviour
         if(isMaxDay == false)
         {
             amountDay++;
-            GetDay(amountDay);
         }
     }
     void CheckDay()
@@ -46,24 +44,4 @@ public class DayManager : MonoBehaviour
             Debug.Log("Game Over");
         }
     }
-    void SetDay(int SetDay)
-    {
-        switch (SetDay)
-        {
-            case 0: GetDay(SetDay); break;
-            case 1: GetDay(SetDay); break;
-            case 2: GetDay(SetDay); break;
-            case 3: GetDay(SetDay); break;
-            case 4: GetDay(SetDay); break;
-        }
-    }
-    void GetDay(int GetDay)
-    {
-        //Debug.Log("Day "+ GetDay);
-    }
-}
-public enum ObjectState
-{
-    Good,
-    Damaged
 }

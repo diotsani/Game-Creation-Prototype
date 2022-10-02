@@ -38,7 +38,7 @@ public class HandphoneObject : BaseObject
         {
             Debug.Log("Job Info");
             isClickThis = true;
-            gameFlow.AddInteractable();
+            //gameFlow.AddInteractable();
         }
         
         if(obj.decisionText == Constants.Requirments.Sell)

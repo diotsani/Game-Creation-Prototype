@@ -18,42 +18,44 @@ public class GameFlow : MonoBehaviour
     private PlayerStatusData playerStatusData;
     private void OnEnable()
     {
-        DecisionObject.OnClickInteracted += ReduceInteractable;
+        PlayerStatusData.OnResetAction += OnNewDay;
+        //DecisionObject.OnClickInteracted += ReduceInteractable;
     }
 
     private void OnDisable()
     {
-        DecisionObject.OnClickInteracted -= ReduceInteractable;
+        PlayerStatusData.OnResetAction += OnNewDay;
+        //DecisionObject.OnClickInteracted -= ReduceInteractable;
     }
 
     private void Start()
     {
         playerStatusData = PlayerStatusData.instance;
         
-        _amountInteractables = _maxInteractables;
-        _resetInteractables = 0;
+        //_amountInteractables = _maxInteractables;
+        //_resetInteractables = 0;
     }
 
-    private void Update()
-    {
-        ResetInteractables();
-    }
-    public void AddInteractable()
-    {
-        _amountInteractables++;
-    }
-    void ReduceInteractable()
-    {
-        _amountInteractables--;
-    }
-    void ResetInteractables()
-    {
-        if (_amountInteractables == _resetInteractables)
-        {
-            OnNewDay();
-            _amountInteractables = _maxInteractables;
-        }
-    }
+    // private void Update()
+    // {
+    //     ResetInteractables();
+    // }
+    // public void AddInteractable()
+    // {
+    //     _amountInteractables++;
+    // }
+    // void ReduceInteractable()
+    // {
+    //     _amountInteractables--;
+    // }
+    // void ResetInteractables()
+    // {
+    //     if (_amountInteractables == _resetInteractables)
+    //     {
+    //         OnNewDay();
+    //         _amountInteractables = _maxInteractables;
+    //     }
+    // }
 
     private void OnNewDay()
     {

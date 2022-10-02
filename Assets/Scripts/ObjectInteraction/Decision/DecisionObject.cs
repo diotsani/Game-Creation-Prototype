@@ -8,7 +8,7 @@ public class DecisionObject : MonoBehaviour
 {
     public delegate void EventName();
     public static event EventName OnClickInteracted;
-    
+
     public Button button;
     [SerializeField] private Button lockButton;
     [SerializeField] private TMP_Text text;
@@ -20,6 +20,7 @@ public class DecisionObject : MonoBehaviour
     public int moneyCost;
     [SerializeField] private int bookCost;
     [SerializeField] private int foodCost;
+    [SerializeField] private int actionCost;
     private PlayerStatusData playerStatusData = PlayerStatusData.instance;
 
     private void Start()
@@ -27,7 +28,7 @@ public class DecisionObject : MonoBehaviour
         //playerStatusData = PlayerStatusData.instance;
     }
 
-    public void Init(string GetName, int GetSkillCost, int GetStressCost,int GetHealthCost, int GetMoneyCost,int GetBookCost, int GetFoodCost)
+    public void Init(string GetName, int GetSkillCost, int GetStressCost,int GetHealthCost, int GetMoneyCost,int GetBookCost, int GetFoodCost, int GetActionCost)
     {
         decisionText = GetName;
         this.name = GetName;
@@ -39,6 +40,7 @@ public class DecisionObject : MonoBehaviour
         moneyCost = GetMoneyCost;
         bookCost = GetBookCost;
         foodCost = GetFoodCost;
+        actionCost = GetActionCost;
     }
     public void OnClick(DecisionObject decisionObject, BaseObject baseObject)
     {
@@ -55,104 +57,10 @@ public class DecisionObject : MonoBehaviour
         playerStatusData.MoneyCost(moneyCost);
         playerStatusData.BookCost(bookCost);
         playerStatusData.FoodCost(foodCost);
+        playerStatusData.ActionCost(actionCost);
         
         baseObject.AddAmountClick();
         baseObject.GetDecisionParent(true); // need false when clicked
-    }
-    void SetSellDecision(GameObject obj,BaseObject baseObject)
-    {
-        var PositiveValue = Mathf.Abs(moneyCost);
-        if (PositiveValue >= playerStatusData.money)
-        {
-            playerStatusData.MoneyCost(moneyCost);
-        }
-    }
-    void SetReapairDecision(BaseObject baseObject)
-    {
-        if (decisionText == Constants.Requirments.Repair)
-        {
-            baseObject.ResetAllDecision();
-            baseObject.ResetAmountClick();
-            baseObject._objectState = ObjectState.Good;
-        }
-    }
-    public void SetRequirementDecision()
-    {
-        //LaptopRequirement();
-        //DoorRequirement();
-        //RefrigeratorRequirement();
-    }
-    void LaptopRequirement()
-    {
-        if (decisionText == Constants.Requirments.TakeCourse)
-        {
-            if (playerStatusData.stress >= 50)
-            {
-                GetLockButton().SetActive(true);
-                return;
-            }
-            GetLockButton().SetActive(false);
-        }
-        if (decisionText == Constants.Requirments.ApplyJob)
-        {
-            if (playerStatusData.skill >= 100)
-            {
-                GetLockButton().SetActive(false);
-                return;
-            }
-            GetLockButton().SetActive(true);
-        }
-        if(decisionText == Constants.Requirments.Repair)
-        {
-            GetThisObject().SetActive(false);
-        }
-    }
-    void DoorRequirement()
-    {
-        if (decisionText == Constants.Requirments.Jogging)
-        {
-            if (playerStatusData.money < 40)
-            {
-                GetLockButton().SetActive(true);
-            }
-            else
-            {
-                GetLockButton().SetActive(false);
-            }
-        }
-        if (decisionText == Constants.Requirments.BuyFood)
-        {
-            if (playerStatusData.money < 20)
-            {
-                GetLockButton().SetActive(true);
-            }
-            else
-            {
-                GetLockButton().SetActive(false);
-            }
-        }
-    }
-    void RefrigeratorRequirement()
-    {
-        if (decisionText == Constants.Requirments.Eat)
-        {
-            if (playerStatusData.food < 10)
-            {
-                GetLockButton().SetActive(true);
-            }
-            else
-            {
-                GetLockButton().SetActive(false);
-            }
-        }
-    }
-    public void ServiceDecision(DecisionObject obj)
-    {
-        if (obj.decisionText == Constants.Requirments.Repair)
-        {
-            GetLockButton().gameObject.SetActive(false);
-            GetThisObject().SetActive(true);
-        }
     }
     public GameObject GetLockButton()
     {
@@ -169,16 +77,12 @@ public class DecisionObject : MonoBehaviour
     }
     void OnClickLockButton()
     {
-        Debug.Log(name + " Lock");
-    }
-    void CheckMoneyCost()
-    {
-        var PositiveValue = Mathf.Abs(moneyCost);
-        Debug.Log(PositiveValue);
-
-        if (playerStatusData.money < PositiveValue)
+        var positiveMoney = Mathf.Abs(moneyCost);
+        var message = $"Not Enough Money, You need {positiveMoney} money to unlock this decision";
+        if (decisionText == Constants.Requirments.Repair)
         {
-            Debug.Log("Not enough money");
+            Debug.Log(message);
         }
     }
+    
 }
