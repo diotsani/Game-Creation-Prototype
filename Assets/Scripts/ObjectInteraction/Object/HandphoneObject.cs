@@ -10,7 +10,7 @@ public class HandphoneObject : BaseObject
     [SerializeField]protected int saveClick;
     protected override void Start()
     {
-        _decisionScriptable = Resources.Load<DecisionScriptable>(Constants.GetData.Handphone);
+        _decisionScriptable = Resources.Load<DecisionScriptable>(Constants.Path.Handphone);
         base.Start();
         OnClickSpecificDecision();
         

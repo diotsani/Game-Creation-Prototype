@@ -7,7 +7,7 @@ public class BookObject : BaseObject
 {
     protected override void Start()
     {
-        _decisionScriptable = Resources.Load<DecisionScriptable>(Constants.GetData.Book);
+        _decisionScriptable = Resources.Load<DecisionScriptable>(Constants.Path.Book);
         base.Start();
         
         OnClickSpecificDecision();
@@ -32,7 +32,7 @@ public class BookObject : BaseObject
     {
         if (obj.decisionText == Constants.Requirments.CheckBookShelf)
         {
-            OnShowMonologueText(Constants.Monologue.CheckBookMonolog);
+            OnShowMonologueText(Constants.Monologue.BookStockMonolog(playerStatusData.book));
         }
     }
 

@@ -10,7 +10,7 @@ public class LaptopObject : BaseObject
     protected bool _isApplying;
     protected override void Start()
     {
-        _decisionScriptable = Resources.Load<DecisionScriptable>(Constants.GetData.Laptop);
+        _decisionScriptable = Resources.Load<DecisionScriptable>(Constants.Path.Laptop);
         base.Start();
         
         OnClickSpecificDecision();

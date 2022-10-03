@@ -18,7 +18,8 @@ public class PlayerStatusData : MonoBehaviour
     public int book = 5;
     public int food;
     public int action;
-    private int maxAction = 3;
+    private int _maxAction = 3;
+    private int _totalAction;
 
     private void Awake()
     {
@@ -41,28 +42,17 @@ public class PlayerStatusData : MonoBehaviour
         money = 50;
         //books = 5;
         food = 30;
-        action = maxAction;
+        action = _maxAction;
     }
 
     private void Update()
     {
         ResetAction();
     }
-
-    private void SetValueName(int valueName)
-    {
-        if(valueName < 0)
-        {
-            valueName = 0;
-        }
-        if(valueName > 100)
-        {
-            valueName = 100;
-        }
-    }
     public void ActionCost(int value)
     {
         action -= value;
+        _totalAction += value;
     }
 
     public void ResetAction()
@@ -70,7 +60,7 @@ public class PlayerStatusData : MonoBehaviour
         if (action == 0)
         {
             OnResetAction?.Invoke();
-            action = maxAction;
+            action = _maxAction;
         }
     }
     public void SkillCost(int value)
@@ -113,10 +103,6 @@ public class PlayerStatusData : MonoBehaviour
     {
         int randomHealth = Random.Range(30, 40);
         health -= randomHealth;
-        if (health < randomHealth)
-        {
-            Debug.Log("Player need eat");
-        }
         if (health < 0)
         {
             health = 0;

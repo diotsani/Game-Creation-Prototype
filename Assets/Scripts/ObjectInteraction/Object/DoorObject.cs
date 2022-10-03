@@ -6,7 +6,7 @@ public class DoorObject : BaseObject
 {
     protected override void Start()
     {
-        _decisionScriptable = Resources.Load<DecisionScriptable>(Constants.GetData.Door);
+        _decisionScriptable = Resources.Load<DecisionScriptable>(Constants.Path.Door);
         base.Start();
     }
 

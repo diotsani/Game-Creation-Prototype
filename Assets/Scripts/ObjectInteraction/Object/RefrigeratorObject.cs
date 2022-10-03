@@ -7,7 +7,7 @@ public class RefrigeratorObject : BaseObject
     //protected int consecutiveDay;
     protected override void Start()
     {
-        _decisionScriptable = Resources.Load<DecisionScriptable>(Constants.GetData.Refrigerator);
+        _decisionScriptable = Resources.Load<DecisionScriptable>(Constants.Path.Refrigerator);
         base.Start();
         OnClickThrow();
     }
