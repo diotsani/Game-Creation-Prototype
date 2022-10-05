@@ -11,6 +11,9 @@ public class PlayerStatusData : MonoBehaviour
     public delegate void EventName();
     public static event EventName OnResetAction;
     
+    public delegate void EventStatus(string name,int value);
+    public static event EventStatus OnStatusChange;
+    
     public int skill;
     public int stress;
     public int health;
@@ -66,6 +69,13 @@ public class PlayerStatusData : MonoBehaviour
     public void SkillCost(int value)
     {
         skill += value;
+        
+        var positiveValue = Mathf.Abs(value);
+        if(positiveValue > 1)
+        {
+            OnStatusChange?.Invoke("Skill", value);
+        }
+        
         if(skill < 0)
         {
             skill = 0;
@@ -78,6 +88,13 @@ public class PlayerStatusData : MonoBehaviour
     public void StressCost(int value)
     {
         stress += value;
+        
+        var positiveValue = Mathf.Abs(value);
+        if(positiveValue > 1)
+        {
+            OnStatusChange?.Invoke("Stress", value);
+        }
+        
         if (stress < 0)
         {
             stress = 0;
@@ -90,6 +107,13 @@ public class PlayerStatusData : MonoBehaviour
     public void HealthCost(int value)
     {
         health += value;
+        
+        var positiveValue = Mathf.Abs(value);
+        if(positiveValue > 1)
+        {
+            OnStatusChange?.Invoke("Health", value);
+        }
+        
         if (health < 0)
         {
             health = 0;
@@ -103,6 +127,13 @@ public class PlayerStatusData : MonoBehaviour
     {
         int randomHealth = Random.Range(30, 40);
         health -= randomHealth;
+        
+        var positiveValue = Mathf.Abs(randomHealth);
+        if(positiveValue > 1)
+        {
+            OnStatusChange?.Invoke("Health", randomHealth*-1);
+        }
+        
         if (health < 0)
         {
             health = 0;
@@ -114,15 +145,14 @@ public class PlayerStatusData : MonoBehaviour
     }
     public void MoneyCost(int value)
     {
-        var PositiveValue = Mathf.Abs(value);
-       // Debug.Log(PositiveValue);
-
-        if (money < PositiveValue)
-        {
-            //Debug.Log("Not enough money");
-            return;
-        }
         money += value;
+        
+        var positiveValue = Mathf.Abs(value);
+        if(positiveValue > 1)
+        {
+            OnStatusChange?.Invoke("Money", value);
+        }
+
         if (money < 0)
         {
             money = 0;
@@ -131,6 +161,13 @@ public class PlayerStatusData : MonoBehaviour
     public void BookCost(int value)
     {
         book += value;
+        
+        var positiveValue = Mathf.Abs(value);
+        if(positiveValue > 0)
+        {
+            OnStatusChange?.Invoke("Book", value);
+        }
+        
         if (book < 0)
         {
             book = 0;
@@ -140,11 +177,19 @@ public class PlayerStatusData : MonoBehaviour
     {
         if (value >= 20)
         {
-            food += Random.Range(10, value);
+            var rnd = Random.Range(10, value);
+            food += rnd;
+            OnStatusChange?.Invoke("Food", rnd);
         }
         else
         {
             food += value;
+            var positiveValue = Mathf.Abs(value);
+            if(positiveValue > 1)
+            {
+                OnStatusChange?.Invoke("Food", value);
+            }
+            
         }
         
         if (food < 0)
